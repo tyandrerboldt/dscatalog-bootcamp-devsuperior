@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './styles.scss';
 import ProductCard from './components/ProductCard';
 import { makeRequest } from '../../core/utils/request';
 import { ProductResponse } from '../../core/types/Product';
-import ProductCardLoader from './components/ProductCardLoader';
+import ProductCardLoader from './components/Loaders/ProductCardLoader';
+import './styles.scss';
 
 const Catalog = () => {
 
