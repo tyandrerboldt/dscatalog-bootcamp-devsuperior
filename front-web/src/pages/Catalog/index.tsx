@@ -11,10 +11,11 @@ const Catalog = () => {
 
   const [productResponse, setProductResponse] = useState<ProductResponse>();
   const [isLoading, setIsLoading] = useState(false);
+  const [activePage, setActivePage] = useState(0);
 
   useEffect(() => {
     const params = {
-      page: 0,
+      page: activePage,
       linesPerPage: 12
     }    
 
@@ -22,7 +23,7 @@ const Catalog = () => {
     makeRequest({url:'/products', params})
     .then(response => setProductResponse(response.data))
     .finally(() => setIsLoading(false))
-  }, [])
+  }, [activePage])
 
   return (
     <div className="catalog-container">
@@ -34,7 +35,9 @@ const Catalog = () => {
           ))
         )}        
       </div>
-      <Pagination />
+      {productResponse && (
+        <Pagination onChange={page => setActivePage(page)} activePage={activePage} totalPages={productResponse.totalPages} />
+      )}
     </div>
   );
 };
