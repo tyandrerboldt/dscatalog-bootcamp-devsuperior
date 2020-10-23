@@ -4,16 +4,24 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 import com.tyandrerboldt.dscatalog.entities.User;
 
 public class UserDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+
+	@NotBlank
 	private String firstName;
+	
+	@NotBlank
 	private String lastName;
-	private String email;
-	private String password;
+	
+	@Email
+	private String email;	
 
 	Set<RoleDTO> roles = new HashSet<>();
 
@@ -67,13 +75,6 @@ public class UserDTO implements Serializable {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
