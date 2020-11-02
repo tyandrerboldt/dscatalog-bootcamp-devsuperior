@@ -1,6 +1,7 @@
 import React from 'react';
 import './styles.scss';
 import { NavLink } from 'react-router-dom';
+import { isAllowedByRole } from 'core/utils/auth';
 
 const Navbar = () => {
   return (
@@ -16,11 +17,13 @@ const Navbar = () => {
             Minhas categorias
           </NavLink>
         </li>
-        <li>
-          <NavLink to="/admin/users" className="admin-nav-item">
-            Meus usuarios
-          </NavLink>
-        </li>
+        {isAllowedByRole(['ROLE_ADMIN']) && (
+          <li>
+            <NavLink to="/admin/users" className="admin-nav-item">
+              Meus usuarios
+            </NavLink>
+          </li>
+        )}
       </ul>
     </nav>
   )
