@@ -29,15 +29,9 @@ public class ProductService {
 	private CategoryRepository categoryRepository;
 	
 	@Transactional(readOnly = true)
-	public Page<ProductDTO> findAllPaged(PageRequest pageRequest) {
-		Page<Product> list = productRepository.findAll(pageRequest);
-		return list.map(product -> new ProductDTO(product));
-	}
-	
-	@Transactional(readOnly = true)
-	public Page<ProductDTO> searchPaged(Long categoryId, PageRequest pageRequest) {
+	public Page<ProductDTO> searchPaged(Long categoryId, String name, PageRequest pageRequest) {
 		Category category = (categoryId == 0) ? null : categoryRepository.getOne(categoryId);
-		Page<Product> list = productRepository.search(category, pageRequest);
+		Page<Product> list = productRepository.search(category, name, pageRequest);
 		return list.map(product -> new ProductDTO(product, product.getCategories()));
 	}
 	
