@@ -32,6 +32,7 @@ public class ProductResource {
 	
 	@GetMapping
 	public ResponseEntity<Page<ProductDTO>> findAll(
+			@RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId,
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
@@ -40,10 +41,25 @@ public class ProductResource {
 		
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		
-		Page<ProductDTO> list = productService.findAllPaged(pageRequest);
+		Page<ProductDTO> list = productService.searchPaged(Long.valueOf(categoryId), pageRequest);
 		
 		return ResponseEntity.ok(list);
 	}
+
+//	@GetMapping
+//	public ResponseEntity<Page<ProductDTO>> findAll(
+//			@RequestParam(value = "page", defaultValue = "0") Integer page,
+//			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
+//			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
+//			@RequestParam(value = "orderBy", defaultValue = "name") String orderBy
+//			){
+//		
+//		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+//		
+//		Page<ProductDTO> list = productService.findAllPaged(pageRequest);
+//		
+//		return ResponseEntity.ok(list);
+//	}
 	
 	@GetMapping("/{productId}")
 	public ResponseEntity<ProductDTO> findById(@PathVariable Long productId){

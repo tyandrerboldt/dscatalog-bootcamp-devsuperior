@@ -35,6 +35,13 @@ public class ProductService {
 	}
 	
 	@Transactional(readOnly = true)
+	public Page<ProductDTO> searchPaged(Long categoryId, PageRequest pageRequest) {
+		Category category = (categoryId == 0) ? null : categoryRepository.getOne(categoryId);
+		Page<Product> list = productRepository.search(category, pageRequest);
+		return list.map(product -> new ProductDTO(product, product.getCategories()));
+	}
+	
+	@Transactional(readOnly = true)
 	public ProductDTO findById(Long productId) {
 		Product product = productRepository.findById(productId)
 				.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
