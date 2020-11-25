@@ -9,7 +9,13 @@ type Props = {
 
 const ProductCard = ({product}:Props) => (
   <div className="card-base border-radius-10 product-card">
-    <img src={product.imgUrl} alt={product.name} className="product-card-image" />
+    {product.imgUrl && ( 
+      <img 
+        src={product.imgUrl} 
+        alt={product.name} 
+        className="product-card-image" 
+      />
+    )}
     <div className="product-info">
       <h6 className="product-name">
         {product.name}
