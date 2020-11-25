@@ -1,27 +1,37 @@
 import React from 'react';
 import './styles.scss';
 import ProductPrice from 'core/components/ProductPrice';
+import { Product } from 'core/types/Product';
 
-const Card = () => {
+type Props = {
+  product: Product;
+}
+
+const Card = ({ product }: Props) => {
   return (
     <div className="card-base product-card-admin">
       <div className="row">
         <div className="col-2 text-center border-right py-3">
           <img 
-            src="https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/4-big.jpg" 
+            src={product.imgUrl} 
             className="product-card-image-admin"
-            alt="Foto do produto"
+            alt={product.name}
           />
         </div>
         <div className="col-7 py-3">
           <h3 className="product-card-name-admin">
-            Nome do produto na lista
+             {product.name}
           </h3>
-          <ProductPrice price={40.5} />
+          <ProductPrice price={product.price} />
           <div>
-            <span className="badge bagde-pill badge-secondary mr-2">Secondary</span>
-            <span className="badge bagde-pill badge-secondary mr-2">Secondary</span>
-            <span className="badge bagde-pill badge-secondary mr-2">Secondary</span>
+            {product.categories.map(category => (
+              <span 
+                key={category.id} 
+                className="badge bagde-pill badge-secondary mr-2"
+              >
+                {category.name}
+              </span>
+            ))}
           </div>
         </div>
         <div className="col-3 pr-5 d-flex flex-column justify-content-center">

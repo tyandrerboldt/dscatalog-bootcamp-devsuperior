@@ -10,7 +10,7 @@ type Props = {
 }
 
 const Pagination = ({totalPages, activePage, onChange}:Props) => {
-  const items = generateList(3);
+  const items = generateList(totalPages);
   const previousCLass = totalPages > 0 && activePage > 0 ? 'page-active' : 'page-inactive';
   const nextCLass = (activePage + 1) < totalPages ? 'page-active' : 'page-inactive';
 
