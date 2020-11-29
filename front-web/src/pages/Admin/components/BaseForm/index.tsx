@@ -30,7 +30,7 @@ const BaseForm = ({title, children}:Props) => {
         <button 
           className="btn btn-primary border-radius-10"
         >
-          ENVIAR
+          SALVAR
         </button>
       </div>
     </div>

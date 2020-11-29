@@ -14,7 +14,9 @@ const List = () => {
   useEffect(() => {
     const params = {
       page: activePage,
-      linesPerPage: 4
+      linesPerPage: 4,
+      direction: 'DESC',
+      orderBy: 'id'
     }    
 
     setIsLoading(true);
@@ -33,7 +35,7 @@ const List = () => {
         ADICIONAR
       </button>
       <div className="admin-list-container">
-        {productResponse?.content.map(product => (
+        {!isLoading && productResponse?.content.map(product => (
           <Card product={product} key={product.id} />
         ))}
         {productResponse && (
