@@ -34,14 +34,17 @@ const List = () => {
   }
 
   const onRemove = (productId: number) => {
-    makePrivateRequest({ url: `/products/${productId}`, method: 'DELETE' })
-      .then(() => {
-        toast.info("Produto removido com sucesso!");
-        getProducts();
-      })
-      .catch(() => {
-        toast.error("Erro ao tentar remover produto!");
-      });
+    let confirm = window.confirm("Deseja realmente excluir este produto?")
+    if(confirm){
+      makePrivateRequest({ url: `/products/${productId}`, method: 'DELETE' })
+        .then(() => {
+          toast.info("Produto removido com sucesso!");
+          getProducts();
+        })
+        .catch(() => {
+          toast.error("Erro ao tentar remover produto!");
+        });
+    }
   }
 
   return (
